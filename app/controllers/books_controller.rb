@@ -12,7 +12,7 @@ class BooksController < ApplicationController
   end
 
   def index
-    @book = Book.find(params[:id])
+    @books = Book.all
   end
 
   def show
