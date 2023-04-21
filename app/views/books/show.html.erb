@@ -1,16 +1,19 @@
+<%= notice %>
 <div class="container px-5 px-sm-0">
  <div class="row">
   <div class="col-md-3">
-  <%= form_with model: @user do |f| %>
+  <%= form_with model: @book do |f| %>
    <h2>User info</h2>
+   <%= image_tag @user.get_profile_image(100, 100) %>
    <table class="table">
     <tbody>
      <tr>
       <th>name</th>
-      <th></th>
+      <th><%= @user.name %></th>
      </tr>
      <tr>
       <th>introduction</th>
+      <th><%= @user.introduction %></th>
      </tr>
     </tbody>
    </table>
@@ -25,7 +28,30 @@
   <div class="col-md-8 offset-md-1">
    <h2>Book detail</h2>
    <table class="table">
-    <tbody></tbody>
+    <tbody>
+     <tr>
+      <td>
+       <%= link_to user_path(@user.id) do %>
+        <%= image_tag @books.user.get_profile_image(100, 100) %><br>
+        <%= @user.name %>
+       <% end %>
+      </td>
+      <td><%= link_to @books.title, book_path(@books.id) %></td>
+      <td><%= @books.body %></td>
+      <% if @user == current_user %>
+      <td>
+       <%= link_to edit_book_path(@books.id), class:"btn btn-sm btn-success" do %>
+        Edit
+       <% end %>
+       </td>
+      <td>
+       <%= link_to book_path(@books.id), method: :delete, "data-confirm" => "本当に消しますか?", class:"btn btn-sm btn-danger" do %>
+        Destroy
+       <% end %>
+      </td>
+      <% end %>
+     </tr>
+    </tbody>
    </table>
   </div>
  </div>
